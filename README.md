@@ -7,7 +7,7 @@ A simple 2FA library for Node.js
 -   Generate a random 2FA secret.
 
 ```ts
-import { generateSecret } from 'tulip-2fa'; // Not yet published.
+import { generateSecret } from 'tulip-2fa';
 
 // Default usage - Generate a base32-encoded secret of 20 bytes (recommended by RFC4226 for TOTP and HOTP)
 console.log(generateSecret());
@@ -19,7 +19,7 @@ console.log(generateSecret(x));
 -   Generate the 2FA code using a secret.
 
 ```ts
-import { generateCode } from 'tulip-2fa'; // Not yet published.
+import { generateCode } from 'tulip-2fa';
 
 const secret = '<SOME-BASE32-ENCODED-SECRET>';
 
