@@ -3,15 +3,15 @@ import crypto from 'node:crypto';
 import base32 from 'hi-base32';
 
 /**
- *
+ * Generate the current 2FA code from secret.
  * @param options - Options object or secret string.
  * @param options.secret - Base32 encoded secret.
  * @param options.step - Time step in seconds. Defaults to 30.
  * @param options.length - Code length. Defaults to 6.
  * @param options.algorithm - HMAC algorithm. Defaults to sha1.
- * @returns {String} The 2FA code.
+ * @returns {string} The 2FA code.
  */
-export default function generateCode(options: GenerateCodeOptions | String) {
+export default function generateCode(options: GenerateCodeOptions | string) {
 	const { secret, step, length, algorithm } = getOptions(options);
 
 	const counter = Math.floor(Date.now() / 1000 / step);
@@ -32,10 +32,10 @@ export default function generateCode(options: GenerateCodeOptions | String) {
 	return `${binary % 1000000}`.padStart(length, '0');
 }
 
-function getOptions(options: GenerateCodeOptions | String) {
+function getOptions(options: GenerateCodeOptions | string) {
 	const defaultOptions = { step: 30, length: 6, algorithm: 'sha1' };
-	if ('secret' in options) return { ...defaultOptions, ...options };
-	return { ...defaultOptions, secret: options };
+	if (typeof options === 'string') return { ...defaultOptions, secret: options };
+	return { ...defaultOptions, ...options };
 }
 
 export interface GenerateCodeOptions {
